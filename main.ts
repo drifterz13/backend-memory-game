@@ -26,6 +26,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan("combined"));
 
+app.get("/", (req, res) => {
+  res.send("Hi there! 🙂");
+});
+
 app.get("/ranks", async (req, res) => {
   const ranks = await getRanks();
   res.status(200).json({ data: { ranks } });
