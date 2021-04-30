@@ -1,9 +1,10 @@
 {
   "name": "backend-memory-game",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/main.js",
   "license": "MIT",
   "scripts": {
+    "start": "tsc && node dist/main.js",
     "dev": "ts-node-dev main.ts"
   },
   "dependencies": {
