@@ -4,12 +4,14 @@ import { body, validationResult } from "express-validator";
 import morgan from "morgan";
 import cors from "cors";
 
+require("dotenv").config();
+
 import { getRanks, postRank } from "./app/data";
 
 const PORT = process.env.PORT || 8000;
 
 mongoose
-  .connect("mongodb://localhost/memoryGame", {
+  .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
@@ -27,7 +29,7 @@ app.use(express.json());
 app.use(morgan("combined"));
 
 app.get("/", (req, res) => {
-  res.send("Hi there! 🙂");
+  res.send("Hi there! 🍖");
 });
 
 app.get("/ranks", async (req, res) => {
@@ -55,5 +57,9 @@ app.post(
 );
 
 app.listen(PORT, () => {
-  console.log(`App is running on port: ${PORT} 🚀`);
+  console.log(
+    `App is running on port: ${PORT} 🚀🐰 --env=${
+      process.env.NODE_ENV === "production" ? "prod" : "dev"
+    }`
+  );
 });

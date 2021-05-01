@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  memory-game:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+    container_name: memory-game
+    ports:
+      - "8000:8000"
+    # for prod: npm run start
+    command: npm run dev
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:4.4.5-bionic
+    container_name: mongo
+    volumes:
+      - mongodb:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  mongodb:
